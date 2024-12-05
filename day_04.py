@@ -21,3 +21,13 @@ for y, line in enumerate(grid):
         if x - len(WORD) + 1 >= 0 and y + len(WORD) <= len(grid):  # check bounds
             count += validate_word(WORD, [grid[y+diag][x-diag] for diag in range(len(WORD))])  # diagonal left
 print(count)
+
+# %% Task 2
+count = 0
+for y, line in enumerate(grid):
+    for x in range(len(line)):
+        if grid[y][x] != "A" or y == 0 or y == len(grid) - 1 or x == 0 or x == len(grid[0]) - 1:
+            continue
+        if sorted(grid[y-1][x-1] + grid[y+1][x+1]) == ["M", "S"] and sorted(grid[y-1][x+1] + grid[y+1][x-1]) == ["M", "S"]:
+            count += 1
+print(count)
